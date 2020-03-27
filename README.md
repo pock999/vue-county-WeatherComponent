@@ -22,3 +22,9 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+### 資料:http://opendata.epa.gov.tw/webapi/Data/ATM00698/?$skip=0&$top=1000&format=json
+
+
+### 授權條款:https://data.gov.tw/license
