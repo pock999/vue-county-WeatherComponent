@@ -8,6 +8,7 @@
       資料來源:<a href="https://opendata.epa.gov.tw/Data/Details/ATM00698/?show=all">行政院環境保護署。環境資源資料開放平臺</a>
       <br/>
       <a href="https://data.gov.tw/license">政府資料開放授權條款</a>
+      目前上方navbar沒有用途
     </b-alert>
     <b-navbar toggleable="md" type="dark" variant="info">
         <b-navbar-brand href="#">
