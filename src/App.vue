@@ -4,7 +4,11 @@
       class=" d-lg-none"
       表示螢幕是lg的情形下，display是nane
      -->
-    <b-alert show dismissible class="m-3 mb-5" >Default Alert</b-alert>
+    <b-alert show dismissible class="m-3 mb-5" >
+      資料來源:<a href="https://opendata.epa.gov.tw/Data/Details/ATM00698/?show=all">行政院環境保護署。環境資源資料開放平臺</a>
+      <br/>
+      <a href="https://data.gov.tw/license">政府資料開放授權條款</a>
+    </b-alert>
     <b-navbar toggleable="md" type="dark" variant="info">
         <b-navbar-brand href="#">
           <p class="h3 mt-2">
@@ -33,79 +37,128 @@
         </b-collapse>
     </b-navbar>
 
-    <!-- 選用卡片，要放置自組件 -->
-    <b-container>
-      <b-row>
-        <b-col lg="4" >
-          <b-card
-            title="Card Title"
-            img-src="https://picsum.photos/600/300/?image=25"
-            img-alt="Image"
-            img-top
-            tag="article"
-            style="max-width: 20rem;"
-            class="mb-2"
-          >
-            <b-card-text>
-              Some quick example text to build on the card title and make up the bulk of the card's content.
-            </b-card-text>
-
-            <b-button href="#" variant="primary">Go somewhere</b-button>
-          </b-card>
-        </b-col>
-        <b-col lg="4" >
-          <b-card
-            title="Card Title"
-            img-src="https://picsum.photos/600/300/?image=25"
-            img-alt="Image"
-            img-top
-            tag="article"
-            style="max-width: 20rem;"
-            class="mb-2"
-          >
-            <b-card-text>
-              Some quick example text to build on the card title and make up the bulk of the card's content.
-            </b-card-text>
-
-            <b-button href="#" variant="primary">Go somewhere</b-button>
-          </b-card>
-        </b-col>
-        <b-col lg="4" >
-          <b-card
-            title="Card Title"
-            img-src="https://picsum.photos/600/300/?image=25"
-            img-alt="Image"
-            img-top
-            tag="article"
-            style="max-width: 20rem;"
-            class="mb-2"
-          >
-            <b-card-text>
-              Some quick example text to build on the card title and make up the bulk of the card's content.
-            </b-card-text>
-
-            <b-button href="#" variant="primary">Go somewhere</b-button>
-          </b-card>
-        </b-col>
-      </b-row>
-    </b-container>
+    <InfoCard
+    :info-list="initList"
+    :locate-img="locationImg"
+    ></InfoCard>
     
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/InfoCard.vue'
+// https://cors-anywhere.herokuapp.com/http://opendata.epa.gov.tw/webapi/Data/ATM00698/?$skip=0&$top=1000&format=json
+import InfoCard from './components/InfoCard.vue'
 export default {
   name: 'App',
   components: {
-    // HelloWorld
+    InfoCard,
   },
   data () {
     return {
+      /** 一開始要渲染的list **/
+      initList:[],
+      /** 代表關注的list **/
       focusList:[],
+      /** 代表各地fakeimg **/
+      locationImg:[
+        {location:"南沙島", img: "https://fakeimg.pl/200x100/38CAE8/EEEEEE/?retina=2&text=南沙島&font=noto"},
+        {location:"東吉島", img: "https://fakeimg.pl/200x100/38E8A5/EEEEEE/?retina=3&text=東吉島&font=noto"},
+        {location:"馬祖", img: "https://fakeimg.pl/200x100/B623E8/EEEEEE/?retina=4&text=馬祖&font=noto"},
+        {location:"金門", img: "https://fakeimg.pl/200x100/E89213/EEEEEE/?retina=5&text=金門&font=noto"},
+        {location:"澎湖", img: "https://fakeimg.pl/200x100/109CE8/EEEEEE/?retina=6&text=澎湖&font=noto"},
+        {location:"蘭嶼", img: "https://fakeimg.pl/200x100/1F75FF/EEEEEE/?retina=7&text=蘭嶼&font=noto"},
+        {location:"大武", img: "https://fakeimg.pl/200x100/46CA41/EEEEEE/?retina=8&text=大武&font=noto"},
+        {location:"臺東", img: "https://fakeimg.pl/200x100/22E80C/EEEEEE/?retina=9&text=臺東&font=noto"},
+        {location:"成功", img: "https://fakeimg.pl/200x100/6F0DFF/EEEEEE/?retina=10&text=成功&font=noto"},
+        {location:"花蓮", img: "https://fakeimg.pl/200x100/20E8AF/EEEEEE/?retina=11&text=花蓮&font=noto"},
+        {location:"恆春", img: "https://fakeimg.pl/200x100/0D6FFF/EEEEEE/?retina=12&text=恆春&font=noto"},
+        {location:"高雄", img: "https://fakeimg.pl/200x100/0DAFBE/EEEEEE/?retina=13&text=高雄&font=noto"},
+        {location:"臺南", img: "https://fakeimg.pl/200x100/FFA60D/EEEEEE/?retina=14&text=臺南&font=noto"},
+        {location:"嘉義", img: "https://fakeimg.pl/200x100/E88058/EEEEEE/?retina=15&text=嘉義&font=noto"},
+        {location:"阿里山", img: "https://fakeimg.pl/200x100/BF8D7E/EEEEEE/?retina=16&text=阿里山&font=noto"},
+        {location:"玉山", img: "https://fakeimg.pl/200x100/95BCBF/EEEEEE/?retina=17&text=玉山&font=noto"},
+        {location:"日月潭", img: "https://fakeimg.pl/200x100/78BCFF/EEEEEE/?retina=18&text=日月潭&font=noto"},
+        {location:"梧棲", img: "https://fakeimg.pl/200x100/90D9E8/EEEEEE/?retina=19&text=梧棲&font=noto"},
+        {location:"臺中", img: "https://fakeimg.pl/200x100/7788BF/EEEEEE/?retina=20&text=臺中&font=noto"},
+        {location:"新竹", img: "https://fakeimg.pl/200x100/EBB47F/EEEEEE/?retina=21&text=新竹&font=noto"},
+        {location:"新屋", img: "https://fakeimg.pl/200x100/4E97BF/EEEEEE/?retina=22&text=新屋&font=noto"},
+        {location:"板橋", img: "https://fakeimg.pl/200x100/A350BF/EEEEEE/?retina=23&text=板橋&font=noto"},
+        {location:"臺北", img: "https://fakeimg.pl/200x100/F5564B/EEEEEE/?retina=24&text=臺北&font=noto"},
+        {location:"陽明山", img: "https://fakeimg.pl/200x100/F5B4F1/EEEEEE/?retina=25&text=陽明山&font=noto"},
+        {location:"鞍部", img: "https://fakeimg.pl/200x100/E0E0AF/EEEEEE/?retina=26&text=鞍部&font=noto"},
+        {location:"蘇澳", img: "https://fakeimg.pl/200x100/7BD0DF/EEEEEE/?retina=27&text=蘇澳&font=noto"},
+        {location:"宜蘭", img: "https://fakeimg.pl/200x100/7EB1DF/EEEEEE/?retina=28&text=宜蘭&font=noto"},
+        {location:"基隆", img: "https://fakeimg.pl/200x100/FF6761/EEEEEE/?retina=29&text=基隆&font=noto"},
+        {location:"彭佳嶼", img: "https://fakeimg.pl/200x100/5E78FF/EEEEEE/?retina=30&text=彭佳嶼&font=noto"},
+      ],
     }
+  },
+  methods:{
+    findImage:function(locate){
+      return this.locationImg.find(ele => ele.location == locate).img;
+    },
+    test:function(){
+      
+    }
+  },
+  created: function() {
+    console.log("init ajax start");
+    const BreakException ={};
+    this.axios.get('https://cors-anywhere.herokuapp.com/http://opendata.epa.gov.tw/webapi/Data/ATM00698/?$skip=0&$top=400&format=json')
+    .then((res) => { 
+      const currentdate = new Date(); 
+      let creationDateFormat;
+      if(currentdate.getMinutes() > 30){
+        creationDateFormat = (currentdate.getFullYear()-1911) + '/' + (currentdate.getMonth()+1) + 
+       '/' + currentdate.getDate() + ' ' + currentdate.getHours() + ':00:00';
+      }else{
+        creationDateFormat = (currentdate.getFullYear()-1911) + '/' + (currentdate.getMonth()+1) + 
+       '/' + currentdate.getDate() + ' ' + (currentdate.getHours()-1) + ':00:00';
+      }
+      const newList = [];
+      res.data.forEach((element) => {
+        if(element.DataCreationDate == creationDateFormat){
+
+          let isHave = false;
+          try {
+            newList.forEach(ele => { 
+              if(ele.siteName == element.SiteName){
+                isHave = true;
+                throw BreakException;
+              }
+            });
+          }catch (e) {
+            if (e !== BreakException) throw e;
+          }
+          
+          if(!isHave){
+            newList.push({
+              siteName : element.SiteName,
+              windDirection: element.WindDirection,
+              windPower: element.WindPower,
+              gust: element.Gust,
+              visibility: element.Visibility,
+              temperature: element.Temperature,
+              moisture: element.Moisture,
+              atmosphericPressure: element.AtmosphericPressure,
+              weather: element.Weather,
+              rainfall1day: element.Rainfall1day,
+              unit: element.Unit,
+              dataCreationDate: element.DataCreationDate,
+              imgSrc: this.findImage(element.SiteName),
+            });
+          }
+          
+        }
+      });
+      this.initList = newList;
+    })
+    .catch((error) => { console.error(error) });
   }
 }
+  
+
+
 </script>
 
 <style>
