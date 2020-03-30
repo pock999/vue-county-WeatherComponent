@@ -1,5 +1,7 @@
 # weather-view
 
+#### 該練習是為了練習axios
+
 ## Project setup
 ```
 npm install
@@ -29,3 +31,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### Open Data授權條款:https://data.gov.tw/license
 
+#### 有機會會嘗試改進
